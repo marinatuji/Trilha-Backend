@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// const User = require('../app/models/user');
 const models = require('../app/models');
 const User = models.User;
 
@@ -14,7 +13,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) =>
   User.create(req.body)
     .then(user => {
-      res.status(201).send({msg: 'Usuário criado com sucesso', user});
+      res.status(201).send({ msg: 'Usuário criado com sucesso', user });
     })
     .catch((error) => {
       console.log('mensagem de erro:', error)

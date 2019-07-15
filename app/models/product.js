@@ -2,12 +2,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define('Product', {
     product: DataTypes.STRING,
-    price: DataTypes.INTEGER,
+    price: DataTypes.FLOAT,
   }, {});
   Product.associate = function(models) {
     // associations can be defined here
-    Product.belongsTo(models.User);
-    Product.hasMany(models.Order);
+    Product.hasMany(models.OrderProduct, {foreignKey: 'orderId'});
   };
   return Product;
 };
