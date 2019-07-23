@@ -4,10 +4,10 @@ const Product = models.Product;
 
 router.get('/', (req, res) => {
   Product.findAll()
-  .then(product => res.send(product))
+    .then(product => res.send(product))
 })
 
-router.post('/products', (req, res) =>
+router.post('/', (req, res) => {
   Product.create(req.body)
     .then(product => {
       res.status(201).send(product);
@@ -15,15 +15,16 @@ router.post('/products', (req, res) =>
     .catch((error) => {
       console.log('mensagem de erro', error)
     })
-)
+})
 
-router.put('/:id', (req, res) => Product.update({ ...req.body }, { where: { id: req.params.id } })
-  .then(() => {
-    Product
-      .findOne({ where: { id: req.params.id } })
-      .then(product => res.send(product.dataValues))
+router.put('/:id', (req, res) => {
+  Product.update({ ...req.body }, { where: { id: req.params.id } })
+    .then(() => {
+      Product
+        .findOne({ where: { id: req.params.id } })
+        .then(product => res.send(product))
+    })
   })
-)
 
 router.get("/:id", (req, res) => {
   Product.findOne({ where: { id: req.params.id } })
